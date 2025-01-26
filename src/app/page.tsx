@@ -1,20 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { getData } from "../server-actions";
-
-type Data = {
-  sentiment: string;
-  aggressiveness: number;
-  language: string;
-};
+import { extractClassificationData } from "../server-actions";
+import { ClassificationData } from "@/schemas";
 
 export default function Home() {
-  const [data, setData] = useState<Data | null>(null);
+  const [classificationData, setClassificationData] =
+    useState<ClassificationData | null>(null);
 
   const fetchData = async () => {
-    const result = await getData();
-    setData(result);
+    const data = await extractClassificationData();
+    setClassificationData(data);
   };
 
   return (
@@ -27,9 +23,9 @@ export default function Home() {
         >
           Fetch Data
         </button>
-        {data && (
+        {classificationData && (
           <pre className="mt-4 p-4 bg-white rounded shadow">
-            {JSON.stringify(data, null, 2)}
+            {JSON.stringify(classificationData, null, 2)}
           </pre>
         )}
       </div>

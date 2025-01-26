@@ -6,6 +6,8 @@ This project uses Next.js with shadcn/ui for creating a text classification appl
 
 Watch the video below to see an example usage of the app:
 
+[langchain-classification.webm](https://github.com/user-attachments/assets/fa1c20c7-13f4-4e28-b5b4-556971ea91dc)
+
 ## Technologies Used
 
 This project leverages the following technologies:

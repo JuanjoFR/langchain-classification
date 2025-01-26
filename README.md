@@ -4,7 +4,7 @@ This project uses Next.js with shadcn/ui for creating a text classification appl
 
 ## Video Demonstration
 
-Watch the video below to see an example usage of the app, translating a phrase into multiple languages:
+Watch the video below to see an example usage of the app:
 
 ## Technologies Used
 

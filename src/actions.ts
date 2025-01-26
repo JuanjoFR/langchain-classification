@@ -2,7 +2,7 @@
 
 import { ChatOpenAI } from "@langchain/openai";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
-import { classificationSchema } from "./schemas";
+import { classificationDataSchema } from "./schemas/classification-data";
 
 const taggingPrompt = ChatPromptTemplate.fromTemplate(
   `Extract the desired information from the following passage.
@@ -14,18 +14,18 @@ Passage:
 `
 );
 
-export async function extractClassificationData() {
+export async function extractClassificationData(formData: FormData) {
   const llm = new ChatOpenAI({
     model: "gpt-4o-mini",
     temperature: 0,
   });
   const llmWihStructuredOutput = llm.withStructuredOutput(
-    classificationSchema,
+    classificationDataSchema,
     { name: "extractor" }
   );
+  formData.get("message");
   const prompt = await taggingPrompt.invoke({
-    input:
-      "Estoy increiblemente contento de haberte conocido! Creo que seremos muy buenos amigos!",
+    input: formData.get("message"),
   });
   const result = await llmWihStructuredOutput.invoke(prompt);
 

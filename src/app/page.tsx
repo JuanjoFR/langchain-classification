@@ -1,34 +1,30 @@
-"use client";
-
-import { useState } from "react";
-import { extractClassificationData } from "../server-actions";
-import { ClassificationData } from "@/schemas";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import * as React from "react";
+import MessageClassificationForm from "@/components/MessageClassificationForm";
 
 export default function Home() {
-  const [classificationData, setClassificationData] =
-    useState<ClassificationData | null>(null);
-
-  const fetchData = async () => {
-    const data = await extractClassificationData();
-    setClassificationData(data);
-  };
-
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-2xl font-bold">Welcome to the Home Page</h1>
-        <button
-          onClick={fetchData}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
-        >
-          Fetch Data
-        </button>
-        {classificationData && (
-          <pre className="mt-4 p-4 bg-white rounded shadow">
-            {JSON.stringify(classificationData, null, 2)}
-          </pre>
-        )}
-      </div>
+    <div className="container mx-auto p-4">
+      <Card className="w-full max-w-2xl mx-auto">
+        <CardHeader>
+          <CardTitle>Message Classification</CardTitle>
+          <CardDescription>
+            Enter your message to classify its sentiment, aggressiveness, and
+            language
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <MessageClassificationForm />
+          </React.Suspense>
+        </CardContent>
+      </Card>
     </div>
   );
 }

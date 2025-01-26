@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const classificationSchema = z.object({
+const classificationDataSchema = z.object({
   sentiment: z
     .enum(["happy", "neutral", "sad"])
     .describe("The sentiment of the text"),
@@ -17,5 +17,5 @@ const classificationSchema = z.object({
     .describe("The language the text is written in"),
 });
 
-export { classificationSchema };
-export type ClassificationData = z.infer<typeof classificationSchema>;
+export { classificationDataSchema };
+export type ClassificationData = z.infer<typeof classificationDataSchema>;
